@@ -19,22 +19,26 @@ class Shop:
             raise ValueError # Returning an error for invalid value
 
     # Returning the bill
-    def issueBill(self, return_request):
-        rentalTime, num_of_bikes, rentalRate = return_request # Amount of time rented, bikes and rental rate
-        
+    def issueBill(self, return_request=None):
         if return_request != None:
+            rentalTime, num_of_bikes, rentalRate = return_request # Amount of time rented, bikes and rental rate
+
             if rentalRate == 1: # If it's hourly
                 bill = round(rentalTime.seconds / 3600) * 5 * num_of_bikes
             elif rentalRate == 2: # IF it's daily
                 bill = round(rentalTime.days) * 10 * num_of_bikes
-            elif rentalTime == 3: # If it's weekly
+            elif rentalRate == 3: # If it's weekly
                 bill = round(rentalTime.days / 7) * 30 * num_of_bikes
-            
-            if 3 <= num_of_bikes <= 5:
+            else:
+                raise ValueError
+
+            if num_of_bikes >= 3:
                 bill *= 0.7 # Applying the discount
 
             self.stock += num_of_bikes # Same as the above
-            return bill    
+            return round(bill)
+        else:
+            return None
 
 
 class Customer():
