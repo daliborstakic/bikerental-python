@@ -10,6 +10,7 @@ class Shop:
 
     def rentBike(self, n_bikes=1, rentalBasis=1):
         now = datetime.now()
+        self.stock -= n_bikes
         return now, n_bikes, rentalBasis
 
     def issueBill(self, return_request):
@@ -26,8 +27,10 @@ class Shop:
             
             if 3 <= num_of_bikes <= 5:
                 bill *= 0.7
+                self.stock += num_of_bikes
                 return bill
             else:
+                self.stock += num_of_bikes
                 return bill
 
 class Customer():
