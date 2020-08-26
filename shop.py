@@ -9,18 +9,18 @@ class Shop:
         return self.stock
 
     # Renting the bike
-    def rentBike(self, n_bikes=1, rentalBasis=1):
+    def rentBike(self, n_bikes=1):
         now = datetime.now() # Getting current time
+
         if n_bikes >= 1:
             self.stock -= n_bikes # Substracing the number of bikes rented
-            return now, n_bikes, rentalBasis
+            return now
         else:
             raise ValueError # Returning an error for invalid value
 
     # Returning the bill
     def issueBill(self, return_request):
-        returnTime, num_of_bikes, rentalRate = return_request
-        rentalTime = datetime.now - returnTime # Amount of time rented
+        rentalTime, num_of_bikes, rentalRate = return_request # Amount of time rented, bikes and rental rate
         
         if return_request != None:
             if rentalRate == 1: # If it's hourly
@@ -32,11 +32,10 @@ class Shop:
             
             if 3 <= num_of_bikes <= 5:
                 bill *= 0.7 # Applying the discount
-                self.stock += num_of_bikes # Returning the bikes
-                return bill
-            else:
-                self.stock += num_of_bikes # Same as the above
-                return bill
+
+            self.stock += num_of_bikes # Same as the above
+            return bill    
+
 
 class Customer():
     def __init__(self): # These values get overridden anyway
@@ -50,3 +49,7 @@ class Customer():
         self.n_bikes = n_bikes
         return self.rentalBasis, self.n_bikes # Returning the parameters
     
+    # Customer returning bike
+    def returnBike(self, when_rented):
+        rented_time = datetime.now() - when_rented
+        return rented_time, self.n_bikes, self.rentalBasis # Returns a request for issue_bill()

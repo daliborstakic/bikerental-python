@@ -28,10 +28,11 @@ class ShopTest(unittest.TestCase):
     # Checking if the method returns correct values
     def test_rent_bike(self):
         now = datetime.now()
-        self.assertEqual(self.shop1.rentBike(), (now, 1, 1))
-        self.assertEqual(self.shop2.rentBike(2, 2), (now, 2, 2))
+        self.assertEqual(self.shop1.rentBike(), now)
+        self.assertEqual(self.shop2.rentBike(2), now)
+
         with self.assertRaises(ValueError): # Context manager for checking a raise value
-            self.shop3.rentBike(-1, 2)
+            self.shop3.rentBike(-1)
 
 
 if __name__ == '__main__':
