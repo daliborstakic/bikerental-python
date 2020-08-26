@@ -2,46 +2,51 @@ from datetime import datetime
 
 class Shop:
     def __init__(self, stock=1):
-        self.stock = stock if stock > 0 else 1 
+        self.stock = stock if stock > 0 else 1 # Setting initial stock
 
+    # Returning the stock parameter
     def display_stock(self):
         return self.stock
 
+    # Renting the bike
     def rentBike(self, n_bikes=1, rentalBasis=1):
-        now = datetime.now()
+        now = datetime.now() # Getting current time
         if n_bikes >= 1:
-            self.stock -= n_bikes
+            self.stock -= n_bikes # Substracing the number of bikes rented
             return now, n_bikes, rentalBasis
         else:
-            raise ValueError
+            raise ValueError # Returning an error for invalid value
 
+    # Returning the bill
     def issueBill(self, return_request):
         returnTime, num_of_bikes, rentalRate = return_request
-        rentalTime = datetime.now - returnTime
+        rentalTime = datetime.now - returnTime # Amount of time rented
         
         if return_request != None:
-            if rentalRate == 1:
+            if rentalRate == 1: # If it's hourly
                 bill = round(rentalTime.seconds / 3600) * 5 * num_of_bikes
-            elif rentalRate == 2:
+            elif rentalRate == 2: # IF it's daily
                 bill = round(rentalTime.days) * 10 * num_of_bikes
-            elif rentalTime == 3:
+            elif rentalTime == 3: # If it's weekly
                 bill = round(rentalTime.days / 7) * 30 * num_of_bikes
             
             if 3 <= num_of_bikes <= 5:
-                bill *= 0.7
-                self.stock += num_of_bikes
+                bill *= 0.7 # Applying the discount
+                self.stock += num_of_bikes # Returning the bikes
                 return bill
             else:
-                self.stock += num_of_bikes
+                self.stock += num_of_bikes # Same as the above
                 return bill
 
 class Customer():
-    def __init__(self):
+    def __init__(self): # These values get overridden anyway
         self.rentalBasis = 0
         self.n_bikes = 0
 
+    # Sending an rent request
+    # This function goes in motion with rentBike()
     def requestBike(self, rentalBasis=1, n_bikes=1):
         self.rentalBasis = rentalBasis
         self.n_bikes = n_bikes
-        return self.rentalBasis, self.n_bikes
+        return self.rentalBasis, self.n_bikes # Returning the parameters
     
