@@ -19,5 +19,14 @@ class ShopTest(unittest.TestCase):
         self.assertEqual(self.shop1.rentBike(), (now, 1, 1))
         self.assertEqual(self.shop2.rentBike(2, 3), (now, 2, 3))
 
+    def test_stock_change(self):
+        self.assertEqual(self.shop1.display_stock(), 1)
+        self.shop1.rentBike()
+        self.assertEqual(self.shop1.display_stock(), 0)
+        self.assertEqual(self.shop2.display_stock(), 10)
+        self.shop2.rentBike()
+        self.assertEqual(self.shop2.display_stock(), 9)
+
+
 if __name__ == '__main__':
     unittest.main()
