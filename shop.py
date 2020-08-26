@@ -5,7 +5,6 @@ class Shop:
         self.stock = stock if stock > 0 else 1 
 
     def display_stock(self):
-        print(f"We currently have {self.stock} bike/s in stock.")
         return self.stock
 
     def rentBike(self, n_bikes=1, rentalBasis=1):
