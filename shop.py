@@ -1,8 +1,8 @@
 from datetime import datetime
 
 class Shop:
-    def __init__(self, stock=0):
-        self.stock = stock
+    def __init__(self, stock=1):
+        self.stock = stock if stock > 0 else 1 
 
     def display_stock(self):
         print(f"We currently have {self.stock} bike/s in stock.")
