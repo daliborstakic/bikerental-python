@@ -9,7 +9,7 @@ class Shop:
         return self.stock
 
     def rentBike(self, n_bikes=1, rentalBasis=1):
-        now = datetime.now
+        now = datetime.now()
         return now, n_bikes, rentalBasis
 
     def issueBill(self, return_request):
