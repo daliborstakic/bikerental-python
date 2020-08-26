@@ -9,8 +9,11 @@ class Shop:
 
     def rentBike(self, n_bikes=1, rentalBasis=1):
         now = datetime.now()
-        self.stock -= n_bikes
-        return now, n_bikes, rentalBasis
+        if n_bikes >= 1:
+            self.stock -= n_bikes
+            return now, n_bikes, rentalBasis
+        else:
+            raise ValueError
 
     def issueBill(self, return_request):
         returnTime, num_of_bikes, rentalRate = return_request
