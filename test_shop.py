@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from shop import Shop, Customer # Importing the shop module
 
 
+# Testing the Shop class
 class ShopTest(unittest.TestCase):
     # Initial instances for testing
     def setUp(self):
@@ -27,7 +28,7 @@ class ShopTest(unittest.TestCase):
         self.assertEqual(self.shop2.display_stock(), 9)
 
     # Checking if the method returns correct values
-    def test_rent_bike(self):
+    def test_rentBike(self):
         # The test kept failing because the miliseconds are not equal
         # But they are mostly a few miliseconds apart
         self.assertEqual(self.shop1.rentBike(), datetime.now())
@@ -37,10 +38,11 @@ class ShopTest(unittest.TestCase):
             self.shop3.rentBike(-1)
 
     # Testing the issue_bill() method
-    def test_issue_bill(self):
+    def test_issueBill(self):
         self.assertIsNone(self.shop1.issueBill()) # Checking if return_request is None
         
-        with self.assertRaises(ValueError): # If the rental is not (1, 2, 3)
+        # If the rental is not (1, 2, 3)
+        with self.assertRaises(ValueError): 
             self.shop1.issueBill((timedelta(), 1, 4))
 
         # Checking for the bill return value
@@ -55,10 +57,23 @@ class ShopTest(unittest.TestCase):
         self.assertEqual(self.shop3.display_stock(), 1)
 
 
+# Testing the Customer class
 class CustomerTest(unittest.TestCase):
-    def setUp(self):
+    def setUp(self): # Variables created before every test
         self.cust1 = Customer()
         self.cust2 = Customer()
+
+    # Testing method requestBike
+    def test_requestBike(self):
+        self.assertEqual(self.cust1.requestBike(), (1, 1))
+        self.cust1.rented_bikes = 0
+        self.assertEqual(self.cust1.requestBike(2, 2), (2, 2))
+        self.cust1.rented_bikes = 0
+
+        # Checking for ValueError
+        with self.assertRaises(ValueError):
+            self.cust1.requestBike(-1, 1)
+            self.cust1.requestBike(1, 5)
 
 
 # Main running
