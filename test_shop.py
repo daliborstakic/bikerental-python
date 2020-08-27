@@ -65,6 +65,7 @@ class CustomerTest(unittest.TestCase):
 
     # Testing method requestBike
     def test_requestBike(self):
+        # Testing if the correct values are returned
         self.assertEqual(self.cust1.requestBike(), (1, 1))
         self.cust1.rented_bikes = 0
         self.assertEqual(self.cust1.requestBike(2, 2), (2, 2))
@@ -75,6 +76,13 @@ class CustomerTest(unittest.TestCase):
             self.cust1.requestBike(-1, 1)
             self.cust1.requestBike(1, 5)
 
+    # Testing method returnBike
+    def test_returnBike(self):
+        self.assertIsNone(self.cust1.returnBike()) # If the method returns None
+        
+        # If the method returns the correct tuple
+        self.assertEqual(self.cust1.returnBike(datetime.now()), (timedelta(), 0, 0))
+    
 
 # Main running
 if __name__ == '__main__':
