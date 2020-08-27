@@ -49,11 +49,17 @@ class Customer():
     # Sending an rent request
     # This function goes in motion with rentBike()
     def requestBike(self, rentalBasis=1, n_bikes=1):
-        self.rentalBasis = rentalBasis
-        self.n_bikes = n_bikes
-        return self.rentalBasis, self.n_bikes # Returning the parameters
+        if 1 <= rentalBasis <= 3 and n_bikes >= 1:
+            self.rentalBasis = rentalBasis
+            self.n_bikes = n_bikes
+            return self.rentalBasis, self.n_bikes # Returning the parameters
+        else:
+            raise ValueError
     
     # Customer returning bike
     def returnBike(self, when_rented):
-        rented_time = datetime.now() - when_rented
-        return rented_time, self.n_bikes, self.rentalBasis # Returns a request for issue_bill()
+        if when_rented != None:
+            rented_time = datetime.now() - when_rented
+            return rented_time, self.n_bikes, self.rentalBasis # Returns a request for issue_bill()
+        else:
+            return None
