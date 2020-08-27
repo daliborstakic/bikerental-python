@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Shop:
     def __init__(self, stock=1):
         self.stock = stock if stock > 0 else 1 # Setting initial stock
