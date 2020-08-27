@@ -57,7 +57,7 @@ class Customer():
             raise ValueError
     
     # Customer returning bike
-    def returnBike(self, when_rented):
+    def returnBike(self, when_rented=None):
         if when_rented != None:
             rented_time = datetime.now() - when_rented
             return rented_time, self.n_bikes, self.rentalBasis # Returns a request for issue_bill()
