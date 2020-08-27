@@ -55,6 +55,12 @@ class ShopTest(unittest.TestCase):
         self.assertEqual(self.shop3.display_stock(), 1)
 
 
+class CustomerTest(unittest.TestCase):
+    def setUp(self):
+        self.cust1 = Customer()
+        self.cust2 = Customer()
+
+
 # Main running
 if __name__ == '__main__':
     unittest.main()
