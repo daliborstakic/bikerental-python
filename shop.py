@@ -6,6 +6,7 @@ class Shop:
         self.stock = stock if stock > 0 else 1 # Setting initial stock
 
     # Returning the stock parameter
+    @property
     def display_stock(self):
         return self.stock
 
