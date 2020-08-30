@@ -12,7 +12,7 @@ class Shop:
 
     @display_stock.setter
     def set_stock(self, value):
-        self.set_stock = value
+        self.stock = value
 
     # Renting the bike
     def rentBike(self, n_bikes=1):
