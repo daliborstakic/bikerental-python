@@ -10,8 +10,9 @@ optionList = ['Hourly', 'Daily', 'Weekly']
 # Shop and Customer variables
 customer = Customer()
 shop = Shop(stock=10)
-when_rented = None
+global when_rented
 
+# Switch-like method for getting OptionMenu index
 def get_list_index(argument):
     switcher = {
         'Hourly': 1,
@@ -22,6 +23,8 @@ def get_list_index(argument):
 
 # return_bike functionality
 def rent_bike():
+    global when_rented
+
     if bike_entry.get() == "":
         set_status("Cannot be empty!", "red") # In empty, show status
     else:
@@ -47,6 +50,22 @@ def rent_bike():
         # Update stock label
         display_stock()
 
+def return_bike():
+    return_request = customer.returnBike(when_rented)
+    bill = shop.issueBill(return_request)
+
+    # Returns the bill
+    set_status(f"You bill is {bill}", "green")
+
+    # Button state
+    if return_button['state'] == tk.NORMAL:
+        return_button['state'] = tk.DISABLED
+
+    if rent_button['state'] == tk.DISABLED:
+        rent_button['state'] = tk.NORMAL
+    
+    display_stock()
+
 def set_status(message, color="black"):
     status = tk.Label(root, text=message, fg=color)
     status.grid(row=2, column=0)
@@ -69,7 +88,7 @@ rental_list = tk.OptionMenu(root, variable, *optionList)
 
 # Third row*
 rent_button = tk.Button(root, text='Rent', command=rent_bike)
-return_button = tk.Button(root, text='Return', state=tk.DISABLED)
+return_button = tk.Button(root, text='Return', command=return_bike, state=tk.DISABLED)
 
 # Display elements
 bike_label.grid(row=0, column=0)
