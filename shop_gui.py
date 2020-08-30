@@ -6,6 +6,30 @@ root = tk.Tk()
 # Option List
 optionList = ['Hourly', 'Daily', 'Weekly']
 
+def get_list_index(argument):
+    switcher = {
+        'Hourly': 1,
+        "Daily": 2,
+        "Weekly": 3,
+    }
+    return switcher.get(argument)
+
+# return_bike functionality
+def rent_bike():
+    if bike_entry.get() == "":
+        set_status("Cannot be empty!", "red") # In empty, show status
+    else:
+        try:
+            num_of_bikes = int(bike_entry.get())
+        except ValueError:
+            set_status("Enter a number!", "red")
+
+        rental_basis = get_list_index(variable.get())
+
+def set_status(message, color="black"):
+    status = tk.Label(root, text=message, fg=color)
+    status.grid(row=2, column=0)
+
 # Tkinter variable
 variable = tk.StringVar(root)
 variable.set(optionList[0])
@@ -19,7 +43,7 @@ rental_label = tk.Label(root, text="Choose rental basis:")
 rental_list = tk.OptionMenu(root, variable, *optionList)
 
 # Third row*
-rent_button = tk.Button(root, text='Rent')
+rent_button = tk.Button(root, text='Rent', command=rent_bike)
 return_button = tk.Button(root, text='Return', state=tk.DISABLED)
 
 # Display elements
