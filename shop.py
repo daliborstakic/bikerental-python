@@ -7,12 +7,8 @@ class Shop:
 
     # Returning the stock parameter
     @property
-    def stock(self):
+    def get_stock(self):
         return self.stock
-
-    @stock.setter
-    def stock(self, value):
-        self.stock = value
 
     # Renting the bike
     def rentBike(self, n_bikes=1):
