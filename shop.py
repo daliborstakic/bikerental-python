@@ -10,12 +10,17 @@ class Shop:
     def display_stock(self):
         return self.stock
 
+    @display_stock.setter
+    def set_stock(self, value):
+        self.set_stock = value
+
     # Renting the bike
     def rentBike(self, n_bikes=1):
         now = datetime.now() # Getting current time
 
         if n_bikes >= 1:
-            self.stock -= n_bikes # Substracing the number of bikes rented
+            new_stock = self.display_stock - n_bikes # Substracing the number of bikes rented
+            self.set_stock(new_stock) # New stock
             return now
         else:
             raise ValueError # Returning an error for invalid value
