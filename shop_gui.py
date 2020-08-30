@@ -30,6 +30,13 @@ def rent_bike():
         except ValueError:
             set_status("Enter a number!", "red") # Shows a warning
 
+        # Button state
+        if rent_button['state'] == tk.NORMAL:
+            rent_button['state'] = tk.DISABLED
+        
+        if return_button['state'] == tk.DISABLED:
+            return_button['state'] = tk.NORMAL
+
         # Using the get_list_index method
         rental_basis = get_list_index(variable.get())
         
@@ -58,7 +65,7 @@ rent_button = tk.Button(root, text='Rent', command=rent_bike)
 return_button = tk.Button(root, text='Return', state=tk.DISABLED)
 
 # Stock display
-stock_label = tk.Label(root, text=f"The current shop stock is {shop.display_stock()}")
+stock_label = tk.Label(root, text=f"The current shop stock is {shop.stock}")
 stock_label.grid(row=4, column=0)
 
 # Display elements
