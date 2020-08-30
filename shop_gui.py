@@ -44,9 +44,16 @@ def rent_bike():
         customer.requestBike(rental_basis, num_of_bikes)
         when_rented = shop.rentBike(customer.num_of_bikes)
 
+        # Update stock label
+        display_stock()
+
 def set_status(message, color="black"):
     status = tk.Label(root, text=message, fg=color)
     status.grid(row=2, column=0)
+
+def display_stock():# Stock display
+    stock_label = tk.Label(root, text=f"The current shop stock is {shop.stock}")
+    stock_label.grid(row=4, column=0)
 
 # Tkinter variable
 variable = tk.StringVar(root)
@@ -64,10 +71,6 @@ rental_list = tk.OptionMenu(root, variable, *optionList)
 rent_button = tk.Button(root, text='Rent', command=rent_bike)
 return_button = tk.Button(root, text='Return', state=tk.DISABLED)
 
-# Stock display
-stock_label = tk.Label(root, text=f"The current shop stock is {shop.stock}")
-stock_label.grid(row=4, column=0)
-
 # Display elements
 bike_label.grid(row=0, column=0)
 bike_entry.grid(row=0, column=1)
@@ -79,6 +82,9 @@ rental_list.grid(row=1, column=1)
 # the actual third row
 rent_button.grid(row=3, column=0)
 return_button.grid(row=3, column=1)
+
+# Stock display
+display_stock()
 
 # Main loop
 root.mainloop()
