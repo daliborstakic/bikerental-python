@@ -57,6 +57,10 @@ class Customer():
         else:
             raise ValueError
     
+    @property
+    def num_of_bikes(self):
+        return self.rented_bikes
+        
     # Customer returning bike
     def returnBike(self, when_rented=None):
         if when_rented != None:
