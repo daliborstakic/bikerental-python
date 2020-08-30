@@ -62,6 +62,10 @@ class Customer():
     def num_of_bikes(self):
         return self.rented_bikes
         
+    @property
+    def rental_basis(self):
+        return self.rental_basis
+    
     # Customer returning bike
     def returnBike(self, when_rented=None):
         if when_rented != None:
