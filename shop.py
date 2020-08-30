@@ -10,7 +10,7 @@ class Shop:
     def stock(self):
         return self.stock
 
-    @display_stock.setter
+    @stock.setter
     def stock(self, value):
         self.stock = value
 
