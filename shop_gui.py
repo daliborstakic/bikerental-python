@@ -10,6 +10,7 @@ optionList = ['Hourly', 'Daily', 'Weekly']
 # Shop and Customer variables
 customer = Customer()
 shop = Shop(stock=10)
+when_rented = None
 
 def get_list_index(argument):
     switcher = {
@@ -31,9 +32,10 @@ def rent_bike():
 
         # Using the get_list_index method
         rental_basis = get_list_index(variable.get())
-
-        # Creating the customer
+        
+        # Renting the actual bike
         customer.requestBike(rental_basis, num_of_bikes)
+        when_rented = shop.rentBike(customer.num_of_bikes)
 
 def set_status(message, color="black"):
     status = tk.Label(root, text=message, fg=color)
