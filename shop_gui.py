@@ -1,10 +1,15 @@
 import tkinter as tk
+from shop import Shop, Customer
 
 # Root window
 root = tk.Tk()
 
 # Option List
 optionList = ['Hourly', 'Daily', 'Weekly']
+
+# Shop and Customer variables
+customer = Customer()
+shop = Shop(stock=10)
 
 def get_list_index(argument):
     switcher = {
@@ -20,11 +25,15 @@ def rent_bike():
         set_status("Cannot be empty!", "red") # In empty, show status
     else:
         try:
-            num_of_bikes = int(bike_entry.get())
+            num_of_bikes = int(bike_entry.get()) # If it's not a number
         except ValueError:
-            set_status("Enter a number!", "red")
+            set_status("Enter a number!", "red") # Shows a warning
 
+        # Using the get_list_index method
         rental_basis = get_list_index(variable.get())
+
+        # Creating the customer
+        customer.requestBike(rental_basis, num_of_bikes)
 
 def set_status(message, color="black"):
     status = tk.Label(root, text=message, fg=color)
@@ -45,6 +54,10 @@ rental_list = tk.OptionMenu(root, variable, *optionList)
 # Third row*
 rent_button = tk.Button(root, text='Rent', command=rent_bike)
 return_button = tk.Button(root, text='Return', state=tk.DISABLED)
+
+# Stock display
+stock_label = tk.Label(root, text=f"The current shop stock is {shop.display_stock()}")
+stock_label.grid(row=4, column=0)
 
 # Display elements
 bike_label.grid(row=0, column=0)
