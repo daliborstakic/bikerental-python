@@ -7,11 +7,11 @@ class Shop:
 
     # Returning the stock parameter
     @property
-    def display_stock(self):
+    def stock(self):
         return self.stock
 
     @display_stock.setter
-    def set_stock(self, value):
+    def stock(self, value):
         self.stock = value
 
     # Renting the bike
@@ -19,8 +19,8 @@ class Shop:
         now = datetime.now() # Getting current time
 
         if n_bikes >= 1:
-            new_stock = self.display_stock - n_bikes # Substracing the number of bikes rented
-            self.set_stock(new_stock) # New stock
+            new_stock = self.stock - n_bikes # Substracing the number of bikes rented
+            self.stock = new_stock # New stock
             return now
         else:
             raise ValueError # Returning an error for invalid value
@@ -42,8 +42,8 @@ class Shop:
             if num_of_bikes >= 3:
                 bill *= 0.7 # Applying the discount
 
-            new_stock = self.display_stock + num_of_bikes # Same as the above
-            self.set_stock(new_stock) # Setting new stock
+            new_stock = self.stock + num_of_bikes # Same as the above
+            self.stock = new_stock # Setting new stock
             return round(bill)
         else:
             return None
