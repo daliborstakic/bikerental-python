@@ -12,20 +12,20 @@ class ShopTest(unittest.TestCase):
         self.shop3 = Shop(-1)
 
     # Checking if the stock returns correctly
-    def test_display_stock(self):
-        self.assertEqual(self.shop1.display_stock(), 1)
-        self.assertEqual(self.shop2.display_stock(), 10)
-        self.assertEqual(self.shop3.display_stock(), 1)
+    def test_get_stock(self):
+        self.assertEqual(self.shop1.get_stock, 1)
+        self.assertEqual(self.shop2.get_stock, 10)
+        self.assertEqual(self.shop3.get_stock, 1)
 
     # Checking if the stock can increase or decrease
     def test_stock_change(self):
-        self.assertEqual(self.shop1.display_stock(), 1)
+        self.assertEqual(self.shop1.get_stock, 1)
         self.shop1.rentBike()
-        self.assertEqual(self.shop1.display_stock(), 0)
+        self.assertEqual(self.shop1.get_stock, 0)
 
-        self.assertEqual(self.shop2.display_stock(), 10)
+        self.assertEqual(self.shop2.get_stock, 10)
         self.shop2.rentBike()
-        self.assertEqual(self.shop2.display_stock(), 9)
+        self.assertEqual(self.shop2.get_stock, 9)
 
     # Checking if the method returns correct values
     def test_rentBike(self):
@@ -52,9 +52,9 @@ class ShopTest(unittest.TestCase):
 
         # Checking if the bikes are returned
         self.shop3.rentBike()
-        self.assertEqual(self.shop3.display_stock(), 0)
+        self.assertEqual(self.shop3.get_stock, 0)
         self.shop3.issueBill((timedelta(), 1, 1))
-        self.assertEqual(self.shop3.display_stock(), 1)
+        self.assertEqual(self.shop3.get_stock, 1)
 
 
 # Testing the Customer class
