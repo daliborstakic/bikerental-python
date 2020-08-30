@@ -42,7 +42,8 @@ class Shop:
             if num_of_bikes >= 3:
                 bill *= 0.7 # Applying the discount
 
-            self.stock += num_of_bikes # Same as the above
+            new_stock = self.display_stock + num_of_bikes # Same as the above
+            self.set_stock(new_stock) # Setting new stock
             return round(bill)
         else:
             return None
